@@ -80,10 +80,13 @@ X = [ones(m, 1) X];
 %
 
 fprintf('Running gradient descent ...\n');
+fprintf('%d training features ...\n', size(X, 2));
 
 % Choose some alpha value
-alpha = 0.01;
-num_iters = 400;
+alpha = 0.1;
+num_iters = 50;
+fprintf('%d learning rate ...\n', alpha);
+fprintf('%d iterations ...\n', num_iters);
 
 % Init Theta and Run Gradient Descent 
 theta = zeros(3, 1);

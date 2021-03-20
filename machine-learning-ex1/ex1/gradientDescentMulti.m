@@ -16,17 +16,20 @@ for iter = 1:num_iters
     % Hint: While debugging, it can be useful to print out the values
     %       of the cost function (computeCostMulti) and gradient here.
     %
+    
+    % setup theta_t holding matrix
+    theta_t = zeros(length(theta), 1);
+    fprintf('%d length holding matrix created...\n', length(theta));
 
+    % calculate thetas
+    for t = 1:length(theta)
+      fprintf('Calculating theta %d for iteration %d ...\n', t, iter);
+      theta_t(t, 1) = theta(t) - ((alpha/m) .* sum((X*theta-y).*X(:, t)));
+    end
+    fprintf('theta calculated as...\n');
+    disp(theta_t);
 
-
-
-
-
-
-
-
-
-
+    theta = theta_t;
     % ============================================================
 
     % Save the cost J in every iteration    
