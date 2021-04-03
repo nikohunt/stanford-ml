@@ -13,12 +13,21 @@ figure; hold on;
 %
 
 
-
-
-
-
-
-
+plot(
+  X(find(y==1), 1), X(find(y==1), 2),
+  'k+', 
+  "markersize", 4, 
+  "markeredgecolor", "black", 
+  "markerfacecolor", "black", 
+  "linewidth", 1
+ );
+plot(
+  X(find(y==0), 1), X(find(y==0), 2), 
+  'ko', 
+  "markersize", 3, 
+  "markeredgecolor", "black", 
+  "markerfacecolor", "yellow"
+  );
 
 % =========================================================================
 
