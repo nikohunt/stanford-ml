@@ -40,7 +40,7 @@ Z = X * theta;
 H = 1./(1+(e.^-Z));
 J = sum((-y'*log(H))-((1-y)'*log(1-H)))/m;
 R = sum(theta(2:end).^2).*(lambda./(2.*m));
-J = (J + R);
+J = J + R;
 
 % Unregularized vectorized calculation to get theta_0
 grad = (X'*(H-y))/m;
