@@ -30,11 +30,14 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
+% Not really necessary to put probability through sigmmoid, but it 
+% makes the output more comprehensible.
+Z = X*all_theta';
+H = 1./(1+e.^-Z);
 
-
-
-
-
+% Get the maximum probability for each row and index, which is class
+% prediction, and is returned.
+[max_prob, p] = max(H, [], 2);
 
 % =========================================================================
 
