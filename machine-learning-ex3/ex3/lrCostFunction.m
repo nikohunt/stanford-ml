@@ -36,14 +36,21 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
+Z = X * theta;
+H = 1./(1+(e.^-Z));
+J = sum((-y'*log(H))-((1-y)'*log(1-H)))/m;
+R = sum(theta(2:end).^2).*(lambda./(2.*m));
+J = (J + R);
 
+% Unregularized vectorized calculation to get theta_0
+grad = (X'*(H-y))/m;
 
+% temp holds theta with zeroed theta_0
+temp = theta;
+temp(1) = 0;
 
-
-
-
-
-
+% update grad for regularization and use temp
+grad = grad + (lambda.*temp)./m;
 
 % =============================================================
 
