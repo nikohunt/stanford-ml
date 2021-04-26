@@ -55,8 +55,6 @@ z3 = Theta2*a2;
 a3 = sigmoid(z3);
 
 % Reshape y into vector
-%y_reshape = reshape(
-
 reshape_y = zeros(num_labels, m);
 
 for i = 1:m
@@ -64,7 +62,12 @@ for i = 1:m
 endfor
 
 J = ((-reshape_y.*log(a3))-((1-reshape_y).*log(1-a3)))/m;
-J = sum(sum(J));
+%R = sum(theta(2:end).^2).*(lambda./(2.*m));
+
+R = (sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:, 2:end).^2))).*(lambda./(2.*m))
+
+
+J = sum(sum(J)) + R;
  
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
