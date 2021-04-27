@@ -61,12 +61,13 @@ for i = 1:m
   reshape_y(y(i), i) = 1;
 endfor
 
+% Compute cost matrix
 J = ((-reshape_y.*log(a3))-((1-reshape_y).*log(1-a3)))/m;
-%R = sum(theta(2:end).^2).*(lambda./(2.*m));
 
-R = (sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:, 2:end).^2))).*(lambda./(2.*m))
+% Compute regularization term
+R = (sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:, 2:end).^2))).*(lambda./(2.*m));
 
-
+% Compute final total cost with regularization
 J = sum(sum(J)) + R;
  
 % Part 2: Implement the backpropagation algorithm to compute the gradients
@@ -84,6 +85,25 @@ J = sum(sum(J)) + R;
 %               over the training examples if you are implementing it for the 
 %               first time.
 %
+
+% Output layer
+d3 = a3 - reshape_y;
+
+% Hidden layer, removing bias layer from Theta2
+% 25x10 * 10X5000 .* 25x5000
+d2 = (Theta2(:, 2:end)'*d3).*sigmoidGradient(z2); 
+
+% Theta1_grad
+delta1 = d2*X_bias;
+
+% Theta2_grad
+delta2 = d3*a2';
+
+% Theta gradients
+Theta1_grad = delta1./m;
+Theta2_grad = delta2./m;
+
+
 % Part 3: Implement regularization with the cost function and gradients.
 %
 %         Hint: You can implement this around the code for
@@ -92,24 +112,19 @@ J = sum(sum(J)) + R;
 %               and Theta2_grad from Part 2.
 %
 
+% temp holds theta with zeroed theta_0
+temp1 = Theta1;
+temp2 = Theta2;
+temp1(:, 1) = 0;
+temp2(:, 1) = 0;
 
 
+% update grad for regularization and use temp
+Theta1_grad = Theta1_grad + (lambda.*temp1)./m;
+Theta2_grad = Theta2_grad + (lambda.*temp2)./m;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+%Theta1_grad += (lambda/m).*(Theta1.*[zeros(25,1) ones(25,400)]);
+%Theta2_grad += (lambda/m).*(Theta2.*[zeros(10,1) ones(10,25)]);
 
 
 % -------------------------------------------------------------
