@@ -40,7 +40,7 @@ xlabel('Change in water level (x)');
 ylabel('Water flowing out of the dam (y)');
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+%pause;
 
 %% =========== Part 2: Regularized Linear Regression Cost =============
 %  You should now implement the cost function for regularized linear 
@@ -94,7 +94,7 @@ plot(X, [ones(m, 1) X]*theta, '--', 'LineWidth', 2)
 hold off;
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+%pause;
 
 
 %% =========== Part 5: Learning Curve for Linear Regression =============
@@ -123,7 +123,7 @@ for i = 1:m
 end
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+%pause;
 
 %% =========== Part 6: Feature Mapping for Polynomial Regression =============
 %  One solution to this is to use polynomial regression. You should now
@@ -153,7 +153,7 @@ fprintf('Normalized Training Example 1:\n');
 fprintf('  %f  \n', X_poly(1, :));
 
 fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+%pause;
 
 
 
@@ -193,7 +193,7 @@ for i = 1:m
 end
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+%pause;
 
 %% =========== Part 8: Validation for Selecting Lambda =============
 %  You will now implement validationCurve to test various values of 
@@ -217,4 +217,20 @@ for i = 1:length(lambda_vec)
 end
 
 fprintf('Program paused. Press enter to continue.\n');
+%pause;
+
+% Get minimum lambda
+[min_error_val, min_idx_lambda] = min(error_val);
+lambda_best = lambda_vec(min_idx_lambda);
+fprintf('Minimum lambda is %f\n', lambda_best);
+
+% Train and get test error
+[theta] = trainLinearReg(X_poly, y, lambda_best);
+J = linearRegCostFunction(X_poly_test, ytest, theta, 0);
+
+fprintf('Test error %f\n\n', J);
+
+
+fprintf('Program paused. Press enter to continue.\n');
+
 pause;
