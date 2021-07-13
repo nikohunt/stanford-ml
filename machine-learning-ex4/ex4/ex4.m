@@ -39,10 +39,10 @@ m = size(X, 1);
 sel = randperm(size(X, 1));
 sel = sel(1:100);
 
-displayData(X(sel, :));
+%displayData(X(sel, :));
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+%pause;
 
 
 %% ================ Part 2: Loading Parameters ================
@@ -108,6 +108,7 @@ pause;
 %  implement the gradient for the sigmoid function. You should complete the
 %  code in the sigmoidGradient.m file.
 %
+
 
 fprintf('\nEvaluating sigmoid gradient...\n')
 
